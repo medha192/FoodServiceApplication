@@ -18,19 +18,18 @@ Subscribe Event - FoodProcessService.API subscribes to the event created by Food
  - To add migration, go to package manager console and type 'Add-Migration <Migration Name>'
  - To update database, go to package manager console and type 'Update-Database'
  For more information on migration please refer "https://docs.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=vs"
-#end
 
 #Queue broker
 - Rabbit Mq 
 - You need to have rabbitmq up and running for this application
 - This application is using local host as server.
 - To install the rabbitmq pleas refer to  "https://www.rabbitmq.com/dotnet.html"
-#end
+
 
 #Design Pattern 
 - Mediator 
 - Mediator pattern is used to reduce communication complexity between multiple objects or classes
-# end
+
 
 #Framework and Library Used
 - RabbitMQ Client

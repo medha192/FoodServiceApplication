@@ -20,34 +20,34 @@ Subscribe Event - FoodProcessService.API subscribes to the event created by Food
  - To add migration, go to package manager console and type 'Add-Migration <Migration Name>'
  - To update database, go to package manager console and type 'Update-Database'
  For more information on migration please refer "https://docs.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=vs"
-#end
+# end
  
-#Queue broker
+# Queue broker
 - Rabbit Mq 
 - You need to have rabbitmq up and running for this application
 - This application is using local host as server.
 - To install the rabbitmq pleas refer to  "https://www.rabbitmq.com/dotnet.html"
 #end
 
-#Design Pattern 
+# Design Pattern 
 - Mediator 
 - Mediator pattern is used to reduce communication complexity between multiple objects or classes
 #end
 
-#Metrics and tracing
+# Metrics and tracing
 - For Metric and tracing using Prometheus 
 - Ports are currently hard coded currently, before running application configure the port pointing to correct environment and run the Prometheus before running application
 - make sure you configure Prometheus in rabbitmq for tracing rabbitmq. For more info on how to set it up please refer to https://www.rabbitmq.com/prometheus.html
 #end
 
-#Framework and Library Used
+# Framework and Library Used
 - RabbitMQ Client
 - MediatoR
 - EntityFramework
 - Dependency Injection
 #end
 
-#Running Application
+# Running Application
 - FoodService.MVC is configured to run on https://localhost:5005;http://localhost:5004
 - PlaceOrderService.Api is configured to run on https://localhost:5001;http://localhost:5000
 - ProcessOrderService.Api is configured to run on https://localhost:5003;http://localhost5002:

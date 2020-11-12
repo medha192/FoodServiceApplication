@@ -1,19 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using FoodServiceApp.Domain.Core.Bus;
 using FoodServiceApp.Infra.Bus;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using PlaceOrderService.Api.Application.Interfaces;
 using PlaceOrderService.Api.Application.Services;
 using PlaceOrderService.Api.Data.Context;
@@ -21,6 +14,7 @@ using PlaceOrderService.Api.Data.Repository;
 using PlaceOrderService.Api.Domain.CommandHandlers;
 using PlaceOrderService.Api.Domain.Commands;
 using PlaceOrderService.Api.Domain.Interfaces;
+using Prometheus;
 
 namespace PlaceOrderService.Api
 {
@@ -36,7 +30,7 @@ namespace PlaceOrderService.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connString = "Data Source=DESKTOP-LNF7RO2;Initial Catalog=placeorderdb;Integrated Security=True";
+            var connString = Configuration.GetConnectionString("PlaceOrderDbConnection");
             services.AddDbContext<PlaceOrderDbContext>(options =>
             {
                 options.UseSqlServer(connString);
@@ -66,7 +60,6 @@ namespace PlaceOrderService.Api
                 app.UseSwaggerUI(c =>
                 {
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Order Food service V1");
-                    //c.RoutePrefix = string.Empty;
                 });
                 app.UseDeveloperExceptionPage();
             }
@@ -77,9 +70,12 @@ namespace PlaceOrderService.Api
 
             app.UseAuthorization();
 
+            app.UseHttpMetrics();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapMetrics();
             });
         }
     }

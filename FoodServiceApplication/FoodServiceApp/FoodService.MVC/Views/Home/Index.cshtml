@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Enter details to place order</p>
+</div>
+
+<form action="/home/order" method="post">
+    <table>
+        <tr>
+            <td><label for="OderDetails">Oder Details:</label></td>
+            <td><input type="text" name="OderDetails" /></td>
+            
+        </tr>
+        <tr>
+            <td><label for="OrderName">Order Name:</label></td>
+            <td><input type="text" name="OrderName" /></td>
+        </tr>
+        <tr>
+            <td><label for="OrderFrom">Order From:</label></td>
+            <td><input type="text" name="OrderFrom" /></td>
+        </tr>
+        <tr>
+            <td><label for="OrderQuantity">Order Quantity:</label></td>
+            <td><input type="text" name="OrderQuantity" /></td>
+        </tr>
+        <tr>
+            <td><label for="Amount">Amount:</label></td>
+            <td><input type="text" name="Amount" /></td>
+        </tr>
+        <tr>
+            <td><input type="submit" name="Order" /></td>
+        </tr>
+    </table>
+</form>

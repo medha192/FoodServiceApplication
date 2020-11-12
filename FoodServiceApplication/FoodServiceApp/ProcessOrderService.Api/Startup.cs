@@ -21,6 +21,7 @@ using ProcessOrderService.Api.Data.Repository;
 using ProcessOrderService.Api.Domain.EventHandlers;
 using ProcessOrderService.Api.Domain.Events;
 using ProcessOrderService.Api.Domain.Interfaces;
+using Prometheus;
 
 namespace ProcessOrderService.Api
 {
@@ -37,7 +38,7 @@ namespace ProcessOrderService.Api
         public void ConfigureServices(IServiceCollection services)
         {
 
-            var connString = "Data Source=DESKTOP-LNF7RO2;Initial Catalog=processorderdb;Integrated Security=True";
+            var connString = Configuration.GetConnectionString("ProcessOrderDbConnection");
             services.AddDbContext<ProcessDbContext>(options =>
             {
                 options.UseSqlServer(connString);
@@ -70,7 +71,6 @@ namespace ProcessOrderService.Api
                 app.UseSwaggerUI(c =>
                 {
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Process order service V1");
-                    //c.RoutePrefix = string.Empty;
                 });
 
                 app.UseDeveloperExceptionPage();
@@ -81,10 +81,12 @@ namespace ProcessOrderService.Api
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseHttpMetrics();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapMetrics();
             });
 
             ConfigureEventBus(app);
